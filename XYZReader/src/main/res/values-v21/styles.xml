@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Bacon" parent="@style/Theme.BaconGeneral">
+        <!--the rest of the attributes are in styles.xml-->
+        <item name="android:navigationBarColor">@color/light_green_600</item>
+    </style>
+
+    <style name="Theme.Bacon.Detail">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
