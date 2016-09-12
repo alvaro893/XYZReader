@@ -4,9 +4,12 @@
 package com.example.xyzreader.ui;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
@@ -50,13 +53,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mContext.getLayoutInflater().inflate(R.layout.list_item_article, parent, false);
         final ViewHolder vh = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mContext.startActivity(new Intent(Intent.ACTION_VIEW,
-                        ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
-            }
-        });
+
         return vh;
     }
 
@@ -79,6 +76,20 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             setAnimation(holder.articleRoot, position);
         }
 
+        holder.articleRoot.setOnClickListener(itemClick(holder));
+    }
+
+    private View.OnClickListener itemClick(final ViewHolder holder){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle =  ActivityOptions.makeSceneTransitionAnimation(mContext,
+                        holder.thumbnailView, holder.thumbnailView.getTransitionName()).toBundle();
+                Uri uri = ItemsContract.Items.buildItemUri(getItemId(holder.getAdapterPosition()));
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                mContext.startActivity(intent, bundle);
+            }
+        };
     }
 
     @Override
