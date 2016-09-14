@@ -5,6 +5,7 @@
         <!--the rest of the attributes are in styles.xml-->
         <item name="android:navigationBarColor">@color/light_green_600</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Bacon.Detail">

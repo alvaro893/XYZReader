@@ -21,6 +21,7 @@
         <item name="colorPrimary">@color/light_green_500</item>
         <item name="colorAccent">@color/deep_orange_A400</item>
         <item name="colorPrimaryDark">@color/light_green_600</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.Bacon" parent="Theme.BaconGeneral">
@@ -33,6 +34,11 @@
 
     <style name="Theme.Bacon.Title" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">@color/light_green_50</item>
+    </style>
+
+    <style name="Bold_Title">
+        <item name="android:textStyle">italic</item>
+
     </style>
 
 </resources>
