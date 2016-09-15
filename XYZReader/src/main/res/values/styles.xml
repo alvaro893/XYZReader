@@ -16,7 +16,7 @@
 -->
 
 <resources>
-
+    <!--base application theme-->
     <style name="Theme.BaconGeneral" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/light_green_500</item>
         <item name="colorAccent">@color/deep_orange_A400</item>
