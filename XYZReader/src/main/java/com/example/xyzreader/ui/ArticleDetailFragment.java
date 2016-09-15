@@ -2,6 +2,7 @@ package com.example.xyzreader.ui;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.content.Intent;
@@ -11,7 +12,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.Loader;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.bumptech.glide.Glide;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 
@@ -44,8 +45,12 @@ public class ArticleDetailFragment extends Fragment implements
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.toolbar_layout) CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @BindView(R.id.appbar) AppBarLayout appBarLayout;
+    @BindView(R.id.appbar) AppBarLayout mAppBarLayout;
     @BindView(R.id.photo) ImageView mPhotoView;
+    @BindView(R.id.share_fab) FloatingActionButton mShareFab;
+    @BindView(R.id.article_title) TextView mTitleView;
+    @BindView(R.id.article_byline) TextView mBylineView;
+    @BindView(R.id.article_body) TextView mBodyView;
     private Cursor mCursor;
     private long mItemId;
     private View mRootView;
@@ -112,10 +117,7 @@ public class ArticleDetailFragment extends Fragment implements
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         ButterKnife.bind(this, mRootView);
 
-        mPhotoView = (ImageView) mRootView.findViewById(R.id.photo);
-        //mPhotoContainerView = mRootView.findViewById(R.id.photo_container);
-
-        mRootView.findViewById(R.id.share_fab).setOnClickListener(new View.OnClickListener() {
+        mShareFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(Intent.createChooser(ShareCompat.IntentBuilder.from(getActivity())
@@ -136,7 +138,7 @@ public class ArticleDetailFragment extends Fragment implements
         mCollapsingToolbarLayout.setCollapsedTitleTypeface(tf);
 //        mCollapsingToolbarLayout.setExpandedTitleTypeface(tf);
 //        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.Bold_Title);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if(verticalOffset <= - appBarLayout.getTotalScrollRange()){
@@ -152,20 +154,17 @@ public class ArticleDetailFragment extends Fragment implements
         if (mRootView == null) {
             return;
         }
-
-        TextView titleView = (TextView) mRootView.findViewById(R.id.article_title);
-        TextView bylineView = (TextView) mRootView.findViewById(R.id.article_byline);
-        bylineView.setMovementMethod(new LinkMovementMethod());
-        TextView bodyView = (TextView) mRootView.findViewById(R.id.article_body);
-        bodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
+        mCollapsingToolbarLayout.setTitle(mTitle);
+        mBylineView.setMovementMethod(new LinkMovementMethod());
+        mBodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
         if (mCursor != null) {
 //            mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
 //            mRootView.animate().alpha(1);
             mTitle = mCursor.getString(ArticleLoader.Query.TITLE);
-            titleView.setText(mTitle);
-            bylineView.setText(Html.fromHtml(
+            mTitleView.setText(mTitle);
+            mBylineView.setText(Html.fromHtml(
                     DateUtils.getRelativeTimeSpanString(
                             mCursor.getLong(ArticleLoader.Query.PUBLISHED_DATE),
                             System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
@@ -173,7 +172,7 @@ public class ArticleDetailFragment extends Fragment implements
                             + " by <font color='#ffffff'>"
                             + mCursor.getString(ArticleLoader.Query.AUTHOR)
                             + "</font>"));
-            bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
+            mBodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY)));
             ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
                     .get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
                         @Override
@@ -197,9 +196,9 @@ public class ArticleDetailFragment extends Fragment implements
                     });
         } else {
             mRootView.setVisibility(View.GONE);
-            titleView.setText("N/A");
-            bylineView.setText("N/A" );
-            bodyView.setText("N/A");
+            mTitleView.setText("N/A");
+            mBylineView.setText("N/A" );
+            mBodyView.setText("N/A");
         }
     }
 
