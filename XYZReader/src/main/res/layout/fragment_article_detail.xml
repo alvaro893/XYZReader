@@ -32,10 +32,10 @@
                 android:fitsSystemWindows="true"
                 android:transitionName="@string/transition_name_image_article" />
 
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:background="@drawable/photo_background_protection" />-->
+            <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/photo_background_protection" />
 
             <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
