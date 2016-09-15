@@ -1,5 +1,7 @@
 package com.example.xyzreader.ui;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -114,6 +117,9 @@ public class ArticleDetailFragment extends Fragment implements
         Log.d(TAG, "onCreateView fired!");
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         ButterKnife.bind(this, mRootView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mPhotoView.setTransitionName(getString(R.string.transition_name_image_article) + String.valueOf(mItemId));
+        }
 
         mShareFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +198,10 @@ public class ArticleDetailFragment extends Fragment implements
 
                         }
                     });
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                startPostponeTransition(mPhotoView);
+            }
+
         } else {
             mRootView.setVisibility(View.GONE);
             mTitleView.setText("N/A");
@@ -228,6 +238,20 @@ public class ArticleDetailFragment extends Fragment implements
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
         mCursor = null;
         bindViews();
+    }
+
+    private void startPostponeTransition(final View sharedView){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                @Override
+                public boolean onPreDraw() {
+                    sharedView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    getActivity().startPostponedEnterTransition();
+                    return true;
+                }
+            });
+        }
     }
 
 }

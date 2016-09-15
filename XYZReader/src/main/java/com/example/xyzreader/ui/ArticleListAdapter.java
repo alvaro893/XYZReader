@@ -83,6 +83,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.thumbnailView.setTransitionName(mContext.getString(R.string.transition_name_image_article) + getItemId(holder.getAdapterPosition()));
                 Bundle bundle =  ActivityOptions.makeSceneTransitionAnimation(mContext,
                         holder.thumbnailView, holder.thumbnailView.getTransitionName()).toBundle();
                 Uri uri = ItemsContract.Items.buildItemUri(getItemId(holder.getAdapterPosition()));

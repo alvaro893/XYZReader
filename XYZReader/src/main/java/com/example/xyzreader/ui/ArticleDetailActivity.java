@@ -82,10 +82,11 @@ public class ArticleDetailActivity extends AppCompatActivity
                 mSelectedItemId = mStartId;
             }
         }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setSharedElementEnterTransition(TransitionInflater.from(this)
-                    .inflateTransition(R.transition.curve));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.supportPostponeEnterTransition();
         }
+
         /** this is a fix to show the status in the viewpager **/
         ViewCompat.setOnApplyWindowInsetsListener(mPager,
                 new OnApplyWindowInsetsListener() {
