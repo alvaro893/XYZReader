@@ -48,36 +48,13 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin">
 
             </android.support.v7.widget.Toolbar>
-
-
         </android.support.design.widget.CollapsingToolbarLayout>
-
-
-
     </android.support.design.widget.AppBarLayout>
 
-    <!--<FrameLayout-->
-        <!--android:id="@+id/photo_container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/photo_placeholder">-->
-        <!--&lt;!&ndash;suppress AndroidLintContentDescription &ndash;&gt;-->
-        <!--<ImageView-->
-            <!--android:id="@+id/photo"-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="100dp"-->
-            <!--android:transitionName="@string/transition_name_image_article"-->
-            <!--/>-->
-
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="112dp"-->
-            <!--android:background="@drawable/photo_background_protection" />-->
-
-    <!--</FrameLayout>-->
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/scrollview"

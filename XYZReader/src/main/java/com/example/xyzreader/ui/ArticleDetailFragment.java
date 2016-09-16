@@ -108,18 +108,22 @@ public class ArticleDetailFragment extends Fragment implements
         Log.d(TAG, "onStart fired!");
         // Action bar
         getActivityCast().setSupportActionBar(mToolbar);
-        //getActivityCast().getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        mToolbar.setTitle(mTitle);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivityCast().onNavigateUp();
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView fired!");
         mRootView = inflater.inflate(R.layout.fragment_article_detail, container, false);
         ButterKnife.bind(this, mRootView);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mPhotoView.setTransitionName(getString(R.string.transition_name_image_article) + String.valueOf(mItemId));
-        }
+        setTransitionName();
 
         mShareFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,19 +141,27 @@ public class ArticleDetailFragment extends Fragment implements
         return mRootView;
     }
 
+    private void setTransitionName() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        mPhotoView.setTransitionName(getString(R.string.transition_name_image_article) + String.valueOf(mItemId));
+        }
+    }
+
     private void configureCollapsedToolbar() {
         final Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Rosario-Regular.ttf");
         mCollapsingToolbarLayout.setCollapsedTitleTypeface(tf);
-//        mCollapsingToolbarLayout.setExpandedTitleTypeface(tf);
-//        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.Bold_Title);
+        mCollapsingToolbarLayout.setTitleEnabled(false);
         mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if(verticalOffset <= - appBarLayout.getTotalScrollRange()){
-                    mCollapsingToolbarLayout.setTitle(mTitle);
+                //Log.d(TAG, "offset value:"+Math.abs(verticalOffset) + " max:" + appBarLayout.getTotalScrollRange());
+                boolean isEnabled = Math.abs(verticalOffset) >= appBarLayout.getTotalScrollRange();
+                if(isEnabled){
+                    mToolbar.setTitle(mTitle);
                 }else{
-                    mCollapsingToolbarLayout.setTitle("");
+                    mToolbar.setTitle("");
                 }
+
             }
         });
     }
@@ -158,7 +170,6 @@ public class ArticleDetailFragment extends Fragment implements
         if (mRootView == null) {
             return;
         }
-        mCollapsingToolbarLayout.setTitle(mTitle);
         mBylineView.setMovementMethod(new LinkMovementMethod());
         mBodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
