@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 Alvaro Bolanos Rodriguez
  */
-package com.example.xyzreader.ui;
+package com.example.xyzreader.ui.list;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -23,9 +23,11 @@ import android.widget.TextView;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.data.ItemsContract;
+import com.example.xyzreader.ui.DynamicHeightNetworkImageView;
+import com.example.xyzreader.ui.ImageLoaderHelper;
 
-/*
- * TODO: Create JavaDoc
+/**
+ * Adapter for the list in {@link ArticleListActivity}
  */
 public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.ViewHolder> {
     private static final String TAG = ArticleListAdapter.class.getSimpleName();

@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 Alvaro Bolanos Rodriguez
  */
-package com.example.xyzreader.ui;
+package com.example.xyzreader.ui.detail;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

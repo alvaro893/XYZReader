@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.ArticleDetailActivity">
+    tools:context=".ui.detail.ArticleDetailActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -126,6 +126,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/scrollview"
         app:layout_anchorGravity="bottom|end|right"
-        app:layout_behavior=".ui.FabScrollBehavior"/>
+        app:layout_behavior=".ui.detail.FabScrollBehavior"/>
 
 </android.support.design.widget.CoordinatorLayout>

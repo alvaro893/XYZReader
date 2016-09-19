@@ -1,4 +1,4 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.ui.detail;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -30,6 +30,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
+import com.example.xyzreader.ui.list.ArticleListActivity;
+import com.example.xyzreader.ui.ImageLoaderHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -174,9 +176,7 @@ public class ArticleDetailFragment extends Fragment implements
         mBodyView.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "Rosario-Regular.ttf"));
 
         if (mCursor != null) {
-//            mRootView.setAlpha(0);
             mRootView.setVisibility(View.VISIBLE);
-//            mRootView.animate().alpha(1);
             mTitle = mCursor.getString(ArticleLoader.Query.TITLE);
             mTitleView.setText(mTitle);
             mBylineView.setText(Html.fromHtml(
@@ -194,13 +194,7 @@ public class ArticleDetailFragment extends Fragment implements
                         public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
                             Bitmap bitmap = imageContainer.getBitmap();
                             if (bitmap != null) {
-                                //Palette p = Palette.generate(bitmap, 12);
-                                //mMutedColor = p.getDarkMutedColor(0xFF333333);
                                 mPhotoView.setImageBitmap(imageContainer.getBitmap());
-                                // TODO: Investigate this further
-//                                mRootView.findViewById(R.id.meta_bar)
-//                                        .setBackgroundColor(mMutedColor);
-                                //updateStatusBar();
                             }
                         }
 

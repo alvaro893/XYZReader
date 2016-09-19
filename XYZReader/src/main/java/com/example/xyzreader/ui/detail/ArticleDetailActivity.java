@@ -1,6 +1,5 @@
-package com.example.xyzreader.ui;
+package com.example.xyzreader.ui.detail;
 
-import android.annotation.TargetApi;
 import android.database.Cursor;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -69,8 +68,6 @@ public class ArticleDetailActivity extends AppCompatActivity
                 }
             }
         });
-
-        //setUpButton();
 
         if (savedInstanceState == null) {
             if (getIntent() != null && getIntent().getData() != null) {
