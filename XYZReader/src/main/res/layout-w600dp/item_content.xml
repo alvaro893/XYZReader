@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--suppress AndroidLintContentDescription -->
+    <com.example.xyzreader.ui.DynamicHeightNetworkImageView
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/photo_placeholder"
+        android:layout_weight="0.8"/>
+
+
+    <TextView
+        android:id="@+id/article_title"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/light_green_900"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:layout_weight="0.1"/>
+
+    <TextView
+        android:id="@+id/article_subtitle"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/secondary_text"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:layout_weight="0.1"/>
+
+
+</LinearLayout>

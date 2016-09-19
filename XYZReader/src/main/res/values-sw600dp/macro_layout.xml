@@ -1,4 +1,6 @@
 <resources>
+    <integer name="list_column_count">3</integer>
+
     <!-- detail -->
     <dimen name="detail_photo_height">384dp</dimen>
     <dimen name="detail_card_top_margin">384dp</dimen>
@@ -6,4 +8,5 @@
     <dimen name="detail_metabar_vert_padding">32dp</dimen>
     <dimen name="detail_metabar_title_bottom_padding">8dp</dimen>
     <dimen name="detail_body_bottom_margin">96dp</dimen>
+    <dimen name="detail_toolbar_height">260dp</dimen>
 </resources>
